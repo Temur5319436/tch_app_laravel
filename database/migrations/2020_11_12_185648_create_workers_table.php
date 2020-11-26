@@ -16,9 +16,8 @@ class CreateWorkersTable extends Migration
         Schema::create('workers', function (Blueprint $table) {
             $table->id();
             $table->string('fullname');
-            $table->string('number');
-            $table->string('passport_seria');
-            $table->string('passport_nymber');
+            $table->string('tab_number');
+            $table->string('passport');
             $table->timestamps();
         });
     }

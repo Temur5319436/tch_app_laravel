@@ -18,4 +18,5 @@ Route::post('/workers/register', 'App\Http\Controllers\UserController@register')
 
 Route::middleware('auth.basic')->group(function () {
     Route::get('/lists/get_list/{date}', 'App\Http\Controllers\ListController@getList');
+    Route::get('/user', 'App\Http\Controllers\UserController@user');
 });

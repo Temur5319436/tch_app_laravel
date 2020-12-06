@@ -20,7 +20,7 @@ class UserController extends Controller
             'tab_number' => 'required',
             'passport' => 'required',
         ]);
-        $tabNumber = $request->get('tab_number');
+        $tabNumber = $this->tabNumbercorrection($request->get('tab_number'));
         $passport = $request->get('passport');
         
         $worker = Worker::where('tab_number', $tabNumber)->where('passport', $passport)->first();
@@ -34,16 +34,17 @@ class UserController extends Controller
             'password' => bcrypt("tch-$tabNumber-$username"),
             'worker_id' => $worker->id
         ]);
+
+        $user->fullname = Worker::find($user->worker_id)->fullname;
         return response()->json(['message' => 'ok', 'username' => $user['username']], 201);
     }
 
     public function search() {
         $tabNumber = request('tab_number', 0);
-        
-        if ($tabNumber <= 9) $tabNumber = '000' . $tabNumber;
-        elseif ($tabNumber <= 99) $tabNumber = '00' . $tabNumber;
-        elseif ($tabNumber <= 999) $tabNumber = '0' . $tabNumber;
+        $tabNumber = $this->tabNumbercorrection($tabNumber);
 
         return Worker::where('tab_number', $tabNumber)->first();
     }
+
+
 }

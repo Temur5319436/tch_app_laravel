@@ -3,6 +3,10 @@
 /public/storage
 /storage/*.key
 /vendor
+/app/Http/Controllers/lists
+/.idea
+/database/seeders/WorkerSeeder.php
+.vscode/
 .env
 .env.backup
 .phpunit.result.cache

@@ -18,11 +18,11 @@ class ListController extends Controller
     
             $myfile = fopen(__DIR__ . "\\lists\\$date.txt", "r") or die("Unable to open file!");
             $text = fread($myfile, filesize(__DIR__ . "\\lists\\$date.txt"));
+            fclose($myfile);
             $index = strpos($text, "$tabNumber: ", 0);
             $indexPosition = strpos($text, '$', $index - 100);
             $endPosition = strpos($text, '$', $index + 1) - 1;
             $list = substr($text, $indexPosition + 1, $endPosition - $indexPosition);
-            fclose($myfile);
             
             return ['list' => $list, 'message' => 'ok'];
         } catch (Exception $exception) {
